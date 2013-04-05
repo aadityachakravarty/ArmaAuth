@@ -15,13 +15,13 @@ function check($user, $hash, $salt) {
 	global $CONFIG;
 
 	$mysql = new mysqli($CONFIG['host'], $CONFIG['user'], $CONFIG['pass'], $CONFIG['database']);
-	$result = $mysql->query('SELECT ' . $CONFIG['user_row'] . ', ' . $CONFIG['hash_row'] . ($CONFIG['role_row'] !== '' ? ', ' . $CONFIG['role_row'] : '') . ' FROM ' . $CONFIG['table'] . ' WHERE ' . $CONFIG['user_row'] . '="' . $mysql->real_escape_string($user) . '"');
+	$result = $mysql->query('SELECT ' . $CONFIG['user_col'] . ', ' . $CONFIG['hash_col'] . ($CONFIG['role_col'] !== '' ? ', ' . $CONFIG['role_col'] : '') . ' FROM ' . $CONFIG['table'] . ' WHERE ' . $CONFIG['user_col'] . '="' . $mysql->real_escape_string($user) . '"');
 	if($result->num_rows == 1) {
 		$array = $result->fetch_row();
 		$result->close();
 		$mysql->close();
 		if($hash === md5(pack('H*', $array[1]) . $salt))
-			respond('PASSWORD_OK ' . iconv('UTF-8', ' ASCII//TRANSLIT', $array[0]) . '@' . $_SERVER['SERVER_NAME'] . ($CONFIG['role_row'] !== '' && isset($CONFIG['roles'][$array[2]]) ? '/' . $CONFIG['roles'][$array[2]] : ''), 200);
+			respond('PASSWORD_OK ' . iconv('UTF-8', ' ASCII//TRANSLIT', $array[0]) . '@' . $_SERVER['SERVER_NAME'] . ($CONFIG['role_col'] !== '' && isset($CONFIG['roles'][$array[2]]) ? '/' . $CONFIG['roles'][$array[2]] : ''), 200);
 		else
 			respond('PASSWORD_FAIL', 401);
 	}

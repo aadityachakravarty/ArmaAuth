@@ -17,16 +17,16 @@ $CONFIG = array(
 	//Table containing login information
 	'table'		=> 'users',
 
-	//Username row
-	'user_row'	=> 'username',
+	//Username column
+	'user_col'	=> 'username',
 
-	//Hash row, contains the md5 of the password after the prefixes and suffixes have been appended
+	//Hash column, contains the md5 of the password after the prefixes and suffixes have been appended
 	'pass_prefix'	=> '',
 	'pass_suffix'	=> '',
-	'hash_row'	=> 'password',
+	'hash_col'	=> 'password',
 
-	//Role row, optionally contains the index of the user role (blank if disabled), it is designed to fit in with forums
-	'role_row'	=> 'group_id',
+	//Role column, optionally contains the index of the user role (blank if disabled), it is designed to fit in with forums
+	'role_col'	=> 'group_id',
 	'roles'		=> array(
 		'0'	=> 'Administrator',
 		'1'	=> 'Member'
