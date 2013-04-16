@@ -15,7 +15,7 @@ function check($user, $hash, $salt) {
 	global $CONFIG;
 
 	$mysql = new mysqli($CONFIG['host'], $CONFIG['user'], $CONFIG['pass'], $CONFIG['database']);
-	$result = $mysql->query('SELECT ' . $CONFIG['user_col'] . ', ' . $CONFIG['hash_col'] . ($CONFIG['role_col'] !== '' ? ', ' . $CONFIG['role_col'] : '') . ' FROM ' . $CONFIG['table'] . ' WHERE ' . $CONFIG['user_col'] . '="' . $mysql->real_escape_string($user) . '"');
+	$result = $mysql->query('SELECT `' . $CONFIG['user_col'] . '`, `' . $CONFIG['hash_col'] . ($CONFIG['role_col'] !== '' ? '`, `' . $CONFIG['role_col'] : '') . '` FROM `' . $CONFIG['table'] . '` WHERE `' . $CONFIG['user_col'] . '`="' . $mysql->real_escape_string($user) . '"');
 	if($result->num_rows == 1) {
 		$array = $result->fetch_row();
 		$result->close();
