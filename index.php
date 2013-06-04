@@ -1,4 +1,6 @@
 <?php
+setlocale(LC_ALL, 'en_US.utf8');
+
 require 'config.php';
 
 function respond($message, $status) {
@@ -21,7 +23,7 @@ function check($user, $hash, $salt) {
 		$result->close();
 		$mysql->close();
 		if($hash === md5(pack('H*', $array[1]) . $salt))
-			respond('PASSWORD_OK ' . iconv('UTF-8', ' ASCII//TRANSLIT', $array[0]) . '@' . $_SERVER['SERVER_NAME'] . ($CONFIG['role_col'] !== '' && isset($CONFIG['roles'][$array[2]]) ? '/' . $CONFIG['roles'][$array[2]] : ''), 200);
+			respond('PASSWORD_OK ' . iconv('UTF-8', 'ASCII//TRANSLIT', $array[0]) . '@' . $_SERVER['SERVER_NAME'] . ($CONFIG['role_col'] !== '' && isset($CONFIG['roles'][$array[2]]) ? '/' . $CONFIG['roles'][$array[2]] : ''), 200);
 		else
 			respond('PASSWORD_FAIL', 401);
 	}
@@ -32,7 +34,7 @@ function check($user, $hash, $salt) {
 	}
 }
 
-switch($_REQUEST['query']) {
+switch(isset($_REQUEST['query']) ? $_REQUEST['query'] : '') {
 	case 'methods':
 		respond('methods md5', 200);
 	case 'versions':
