@@ -27,6 +27,11 @@ $CONFIG = array(
 
 	//Role column, optionally contains the index of the user role (blank if disabled), it is designed to fit in with forums
 	'role_col'	=> 'group_id',
+
+	//If true, a person is only authenticated if they have a role (specified below)
+	'role_required'	=> true,
+
+	//A map of the roles from the MySQL value (left) to the role (right)
 	'roles'		=> array(
 		'0'	=> 'Administrator',
 		'1'	=> 'Member'

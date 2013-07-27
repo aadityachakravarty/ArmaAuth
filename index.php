@@ -22,8 +22,17 @@ function check($user, $hash, $salt) {
 		$array = $result->fetch_row();
 		$result->close();
 		$mysql->close();
+
+		$role = '';
+		if($CONFIG['role_col'] !== '') {
+			if(isset($CONFIG['roles'][$array[2]]))
+				$role = '/' . $CONFIG['roles'][$array[2]];
+			else if($CONFIG['role_required'])
+				respond('USER_NOT_FOUND', 404);
+		}
+
 		if($hash === md5(pack('H*', $array[1]) . $salt))
-			respond('PASSWORD_OK ' . iconv('UTF-8', 'ASCII//TRANSLIT', $array[0]) . '@' . $_SERVER['SERVER_NAME'] . ($CONFIG['role_col'] !== '' && isset($CONFIG['roles'][$array[2]]) ? '/' . $CONFIG['roles'][$array[2]] : ''), 200);
+			respond('PASSWORD_OK ' . iconv('UTF-8', 'ASCII//TRANSLIT', $array[0]) . '@' . $_SERVER['SERVER_NAME'] . $role, 200);
 		else
 			respond('PASSWORD_FAIL', 401);
 	}
