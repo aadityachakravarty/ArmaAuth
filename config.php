@@ -1,7 +1,5 @@
 <?php
 $CONFIG = array(
-	//Database information
-
 	//MySQL host address, use localhost if unsure
 	'host'		=> 'localhost',
 
@@ -20,7 +18,7 @@ $CONFIG = array(
 	//Username column
 	'user_col'	=> 'username',
 
-	//Hash column, contains the md5 of the password after the prefixes and suffixes have been appended
+	//Hash column, contains the md5 of the password after appending the prefixes and suffixes
 	'pass_prefix'	=> '',
 	'pass_suffix'	=> '',
 	'hash_col'	=> 'password',
@@ -31,7 +29,7 @@ $CONFIG = array(
 	//If true, a person is only authenticated if they have a role (specified below)
 	'role_required'	=> true,
 
-	//A map of the roles from the MySQL value (left) to the role (right)
+	//A map of the roles from the database value (left) to the role (right)
 	'roles'		=> array(
 		'0'	=> 'Administrator',
 		'1'	=> 'Member'
