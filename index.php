@@ -39,6 +39,7 @@ function check($user, $hash, $salt) {
 	else {
 		$result->close();
 		$mysql->close();
+
 		respond('USER_NOT_FOUND', 404);
 	}
 }

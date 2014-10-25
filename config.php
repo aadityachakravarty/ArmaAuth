@@ -27,7 +27,7 @@ $CONFIG = array(
 	'role_col'	=> 'group_id',
 
 	//If true, a person is only authenticated if they have a role (specified below)
-	'role_required'	=> true,
+	'role_required'	=> false,
 
 	//A map of the roles from the database value (left) to the role (right)
 	'roles'		=> array(
