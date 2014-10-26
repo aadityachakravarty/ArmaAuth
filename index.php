@@ -44,19 +44,24 @@ function check($user, $hash, $salt) {
 	}
 }
 
-switch(isset($_REQUEST['query']) ? $_REQUEST['query'] : '') {
-	case 'methods':
-		respond('methods md5', 200);
-	case 'versions':
-		respond('0.1', 200);
-	case 'params':
-		respond('prefix ' . $CONFIG['pass_prefix'] . "\n" . 'suffix ' . $CONFIG['pass_suffix'] . "\n", 200);
-	case 'check':
-		if($_REQUEST['method'] === 'md5')
-			check($_REQUEST['user'], $_REQUEST['hash'], pack('H*', $_REQUEST['salt']));
-		else
-			respond('METHOD_NOT_IMPLEMENTED', 501);
-	default:
-		respond('UNKNOWN_QUERY', 404);
+if(isset($_REQUEST['query'])) {
+	switch($_REQUEST['query']) {
+		case 'methods':
+			respond('methods md5', 200);
+		case 'versions':
+			respond('0.1', 200);
+		case 'params':
+			respond('prefix ' . $CONFIG['pass_prefix'] . "\n" . 'suffix ' . $CONFIG['pass_suffix'] . "\n", 200);
+		case 'check':
+			if($_REQUEST['method'] === 'md5')
+				check($_REQUEST['user'], $_REQUEST['hash'], pack('H*', $_REQUEST['salt']));
+			else
+				respond('METHOD_NOT_IMPLEMENTED', 501);
+		default:
+			respond('UNKNOWN_QUERY', 404);
+	}
+}
+else {
+	respond('ArmaAuth v0.2', 200);
 }
 ?>
