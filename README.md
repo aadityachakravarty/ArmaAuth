@@ -1,6 +1,13 @@
 ArmaAuth
 ========
+ArmaAuth is a simple armathentication script for the 3D lightcycle game [Armagetron Advanced](http://armagetronad.org/). The script is designed to fit in with a forum authentication table with minimal modification to the forum software.
 
-ArmaAuth is a simple armathentication script for the 3D lightcycle game Armagetron Advanced (http://armagetronad.org/).  The script is designed to fit in with a forum authentication table with minimal modification to the forum software.  All that is required is that there is a MySQL backend that stores a password in MD5 format with a static salt, if any.  To use the script, put it and its configuration file in the folder /armaauth/0.1/ under the root of the website and configure it for your authentication table.
+Usage
+-----
+- Prepare a MySQL table for use with authentication or configure your forum software to store passwords in the md5 format with an optional static salt.
+- Edit `config.php` with database connection details and authentication table details.
+- Place `index.php` and `config.php` under the public directory `/armaauth/0.1`.
 
-Licensed under the MIT License; see `LICENSE` for more details.
+Disclaimer
+----------
+I know md5 is no longer considered secure, but unless the whole Armagetron community decides to move on, I am stuck with it.
