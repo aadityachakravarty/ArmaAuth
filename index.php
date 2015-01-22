@@ -31,7 +31,7 @@ function check($user, $hash, $salt) {
 				respond('USER_NOT_FOUND', 404);
 		}
 
-		if($hash === md5(pack('H*', $array[1]) . $salt))
+		if($hash === md5(pack('H*', $array[1]) . pack('H*', $salt)))
 			respond('PASSWORD_OK ' . iconv('UTF-8', 'ASCII//TRANSLIT', $array[0]) . '@' . $_SERVER['SERVER_NAME'] . $role, 200);
 		else
 			respond('PASSWORD_FAIL', 401);
@@ -54,7 +54,7 @@ if(isset($_REQUEST['query'])) {
 			respond('prefix ' . $CONFIG['pass_prefix'] . "\n" . 'suffix ' . $CONFIG['pass_suffix'] . "\n", 200);
 		case 'check':
 			if($_REQUEST['method'] === 'md5')
-				check($_REQUEST['user'], $_REQUEST['hash'], pack('H*', $_REQUEST['salt']));
+				check($_REQUEST['user'], $_REQUEST['hash'], $_REQUEST['salt']);
 			else
 				respond('METHOD_NOT_IMPLEMENTED', 501);
 		default:
